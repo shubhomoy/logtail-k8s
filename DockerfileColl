@@ -1,0 +1,6 @@
+FROM node:6.10.3
+COPY collector.js /logtail/collector.js
+COPY package.json /logtail/package.json
+COPY node_modules /logtail/node_modules
+WORKDIR /logtail
+CMD node collector.js

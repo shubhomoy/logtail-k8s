@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: logtail-aggregator
+  namespace: logging
+spec:
+  selector:
+    app: logtail-aggregator
+  ports:
+    - protocol: TCP
+      port: 3001
+      targetPort: 3001
+      name: web
+  type: NodePort

@@ -1,0 +1,7 @@
+FROM node:6.10.3
+EXPOSE 3001
+COPY aggregator.js /logtail/aggregator.js
+COPY package.json /logtail/package.json
+COPY node_modules /logtail/node_modules
+WORKDIR /logtail
+CMD node aggregator.js

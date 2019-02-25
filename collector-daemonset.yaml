@@ -1,0 +1,37 @@
+kind: DaemonSet
+apiVersion: extensions/v1beta1
+metadata:
+  name: logtail-collector
+  namespace: logging
+  labels:
+    k8s-app: logtail-collector
+spec:
+  template:
+    metadata:
+      labels:
+        k8s-app: logtail-collector
+        name: logtail-collector
+    spec:
+      containers:
+      - image: shubhomoy777/logtail-collector:v1
+        name: logtail-collector
+        volumeMounts:
+        - mountPath: /var/logs/logtail
+          name: log-volume
+        - mountPath: /var/log/pods
+          name: log-volume-link
+        - mountPath: /var/lib/docker/containers
+          name: docker-logs
+      volumes:
+      - name: log-volume
+        hostPath:
+          path: /var/log/containers
+          type: Directory
+      - name: log-volume-link
+        hostPath:
+          path: /var/log/pods
+          type: Directory
+      - name: docker-logs
+        hostPath:
+          path: /var/lib/docker/containers
+          type: Directory

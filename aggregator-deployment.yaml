@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logtail-aggregator
+  namespace: logging
+  labels:
+    app: logtail-aggregator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logtail-aggregator
+  template:
+    metadata:
+      labels:
+        app: logtail-aggregator
+    spec:
+      containers:
+        - name: logtail-aggregator
+          image: docker.io/shubhomoy777/logtail-aggregator:v1
+          ports:
+          - containerPort: 3001
